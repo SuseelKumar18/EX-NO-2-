@@ -1,4 +1,4 @@
-## EX. NO:2 IMPLEMENTATION OF PLAYFAIR CIPHER
+<img width="1111" height="957" alt="image" src="https://github.com/user-attachments/assets/3f7f5274-6d3b-4b53-a707-3b31d7fa3e86" />## EX. NO:2 IMPLEMENTATION OF PLAYFAIR CIPHER
 
  
 
@@ -34,10 +34,139 @@ STEP-5: Display the obtained cipher text.
 
 
 
-Program:
+## Program:
 
+```
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
 
+char keyT[5][5];
 
+void generateKey(char key[])
+{
+    int used[26] = {0}, k = 0, i, j;
+    char ch;
 
+    used['j' - 'a'] = 1;
 
-Output:
+    for (i = 0; key[i]; i++)
+    {
+        ch = tolower(key[i]);
+        if (ch == 'j') ch = 'i';
+
+        if (ch >= 'a' && ch <= 'z' && !used[ch - 'a'])
+        {
+            keyT[k / 5][k % 5] = ch;
+            used[ch - 'a'] = 1;
+            k++;
+        }
+    }
+
+    for (i = 0; i < 26; i++)
+        if (!used[i])
+        {
+            keyT[k / 5][k % 5] = 'a' + i;
+            k++;
+        }
+}
+
+void prepare(char str[], char out[])
+{
+    int i, j = 0;
+
+    for (i = 0; str[i]; i++)
+    {
+        char ch = tolower(str[i]);
+        if (ch < 'a' || ch > 'z') continue;
+        if (ch == 'j') ch = 'i';
+
+        out[j++] = ch;
+
+        if (j % 2 == 0 && out[j - 1] == out[j - 2])
+        {
+            out[j - 1] = 'x';
+        }
+    }
+
+    if (j % 2 != 0) out[j++] = 'x';
+    out[j] = '\0';
+}
+
+void findPos(char ch, int *r, int *c)
+{
+    int i, j;
+
+    if (ch == 'j') ch = 'i';
+
+    for (i = 0; i < 5; i++)
+        for (j = 0; j < 5; j++)
+            if (keyT[i][j] == ch)
+            {
+                *r = i;
+                *c = j;
+                return;
+            }
+}
+
+void process(char str[], int decrypt)
+{
+    int i, r1, c1, r2, c2, shift;
+
+    shift = decrypt ? 4 : 1;
+
+    for (i = 0; str[i] && str[i + 1]; i += 2)
+    {
+        findPos(str[i], &r1, &c1);
+        findPos(str[i + 1], &r2, &c2);
+
+        if (r1 == r2)
+        {
+            str[i] = keyT[r1][(c1 + shift) % 5];
+            str[i + 1] = keyT[r2][(c2 + shift) % 5];
+        }
+        else if (c1 == c2)
+        {
+            str[i] = keyT[(r1 + shift) % 5][c1];
+            str[i + 1] = keyT[(r2 + shift) % 5][c2];
+        }
+        else
+        {
+            str[i] = keyT[r1][c2];
+            str[i + 1] = keyT[r2][c1];
+        }
+    }
+}
+
+int main()
+{
+    char key[30], plain[100], prepared[200], cipher[200];
+
+    printf("Enter the key: ");
+    scanf("%29s", key);
+
+    printf("Enter the plaintext: ");
+    scanf("%99s", plain);
+
+    generateKey(key);
+    prepare(plain, prepared);
+
+    strcpy(cipher, prepared);
+    process(cipher, 0);
+
+    printf("Cipher text: %s\n", cipher);
+
+    process(cipher, 1);
+    printf("Decrypted text: %s\n", cipher);
+
+    return 0;
+}
+```
+
+## Output:
+
+<img width="1111" height="957" alt="image" src="https://github.com/user-attachments/assets/df01232e-bd1e-4cca-ab58-c0ee3de20e8e" />
+
+## Result:
+
+ The program is executed successfully
