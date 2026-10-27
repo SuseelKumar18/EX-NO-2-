@@ -1,6 +1,6 @@
-## AIM:
- 
-To write a C program to implement the Playfair Substitution technique.
+## EX. NO:2 IMPLEMENTATION OF PLAYFAIR CIPHER
+
+## AIM: To write a C program to implement the Playfair Substitution technique.
 
 ## DESCRIPTION:
 
