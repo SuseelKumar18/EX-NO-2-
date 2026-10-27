@@ -1,12 +1,5 @@
-<img width="1111" height="957" alt="image" src="https://github.com/user-attachments/assets/3f7f5274-6d3b-4b53-a707-3b31d7fa3e86" />## EX. NO:2 IMPLEMENTATION OF PLAYFAIR CIPHER
-
- 
-
 ## AIM:
  
-
- 
-
 To write a C program to implement the Playfair Substitution technique.
 
 ## DESCRIPTION:
@@ -18,10 +11,10 @@ To encrypt a message, one would break the message into digrams (groups of 2 lett
 2.	If the letters appear on the same row of your table, replace them with the letters to their immediate right respectively
 3.	If the letters appear on the same column of your table, replace them with the letters immediately below respectively
 4.	If the letters are not on the same row or column, replace them with the letters on the same row respectively but at the other pair of corners of the rectangle defined by the original pair.
-## EXAMPLE:
-![image](https://github.com/Hemamanigandan/EX-NO-2-/assets/149653568/e6858d4f-b122-42ba-acdb-db18ec2e9675)
 
- 
+## EXAMPLE:
+
+![image](https://github.com/Hemamanigandan/EX-NO-2-/assets/149653568/e6858d4f-b122-42ba-acdb-db18ec2e9675)
 
 ## ALGORITHM:
 
